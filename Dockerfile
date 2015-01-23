@@ -33,4 +33,4 @@ EXPOSE 8888
 
 WORKDIR /var/web/contact_form_micro_service
 
-CMD ["rel/contact_form_micro_service/bincontact_form_micro_service", "start"]
+CMD ["rel/contact_form_micro_service/bin/contact_form_micro_service", "start"]
