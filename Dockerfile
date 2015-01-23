@@ -31,6 +31,6 @@ ENV MIX_ENV prod
 EXPOSE 4000
 EXPOSE 8888
 
-WORKDIR /var/web/contact_form_micro_service/rel/contact_form_micro_service/bin
+WORKDIR /var/web/contact_form_micro_service
 
-CMD ["contact_form_micro_service", "start"]
+CMD ["rel/contact_form_micro_service/bincontact_form_micro_service", "start"]
