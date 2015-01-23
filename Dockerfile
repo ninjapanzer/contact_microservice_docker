@@ -14,10 +14,8 @@ RUN apt-get install -y gcc
 RUN apt-get install -y elixir
 RUN apt-get install -y erlang
 RUN apt-get install -y git
-RUN mkdir /phoenixframework
-WORKDIR /phoenixframework
-RUN git clone https://github.com/phoenixframework/phoenix.git && cd phoenix && git checkout v0.8.0 && yes | mix local.hex && yes | mix local.rebar && mix do deps.get, compile
-WORKDIR /
+RUN yes | mix local.hex
+RUN yes | mix local.rebar
 
 ### Setup Microservice
 RUN mkdir /var/web
@@ -27,8 +25,12 @@ RUN git clone https://github.com/ninjapanzer/savvyshots_contact_form_micro_servi
 RUN MIX_ENV=prod mix do deps.get, compile, release
 WORKDIR /
 
+ENV PORT 8888
+ENV MIX_ENV prod
+
 EXPOSE 4000
 EXPOSE 8888
-EXPOSE 80
 
-CMD PORT=8888 MIX_ENV=prod /var/web/contact_form_micro_service/rel/contact_form_micro_service/bin/contact_form_micro_service start
+WORKDIR /var/web/contact_form_micro_service/rel/contact_form_micro_service/bin
+
+CMD ["contact_form_micro_service", "start"]
